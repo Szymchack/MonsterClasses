@@ -9,29 +9,53 @@ namespace MonsterClasses
     public class SpaceMonster : Monster, IBattle
     {
         private bool _hasSpaceship;
+        private int _length;
+        private string _galaxy;
+        private bool _canbreatheinspace;
 
-        public bool HasSpaceship
+        public bool CanBreathInSpace
+        {
+            get { return _canbreatheinspace; }
+            set { _canbreatheinspace = value; }
+        }
+
+
+        public string Galaxy
+        {
+            get { return _galaxy; }
+            set { _galaxy = value; }
+        }
+
+
+        public int Length
+        {
+            get { return _length; }
+            set { _length = value; }
+        }
+
+
+
+        public bool Spaceship
         {
             get { return _hasSpaceship; }
             set { _hasSpaceship = value; }
         }
 
-        public new string Greeting()
+        public SpaceMonster() { }
+
+        public override string Greeting()
         {
-            return $"Hello, I am a Space Monster and my name is {Name}";
+            return $"Hello I am a Space Monster and my name is {Name}.";
         }
 
         public override bool IsHappy()
         {
-            //if (_hasSpaceship)
-            // {
-            //    return true;
-            //}
-            // else
-            //{
-            //     return false;
-            //}
             return _hasSpaceship ? true : false;
+
+        }
+        public override bool HasTeeth()
+        {
+            return true;
         }
 
         public MonsterAction MonsterBattleResponse()
@@ -51,6 +75,7 @@ namespace MonsterClasses
             {
                 return MonsterAction.Defend;
             }
+
         }
     }
 }

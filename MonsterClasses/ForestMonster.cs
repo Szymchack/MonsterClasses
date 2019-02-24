@@ -6,53 +6,75 @@ using System.Threading.Tasks;
 
 namespace MonsterClasses
 {
-    
-        public class ForestMonster : Monster, IBattle
+
+    class ForestMonster : Monster, IBattle
+    {
+        private string _continent;
+        private double _weight;
+        private bool _haslegs;
+        private bool _eatsmeat;
+
+        public bool EatsMeat
         {
-            private bool _hasCave;
+            get { return _eatsmeat; }
+            set { _eatsmeat = value; }
+        }
 
-            public bool HasCave
+        public bool HasLegs
+        {
+            get { return _haslegs; }
+            set { _haslegs = value; }
+        }
+
+
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value; }
+        }
+
+
+        public string Continent
+        {
+            get { return Continent1; }
+            set { Continent1 = value; }
+        }
+
+        public string Continent1 { get => _continent; set => _continent = value; }
+
+        public ForestMonster() { }
+
+        public override bool HasTeeth()
+        {
+            return true;
+        }
+        public override bool IsHappy()
+        {
+            return false;
+        }
+        public override string Greeting()
+        {
+            return base.Greeting();
+        }
+
+        public MonsterAction MonsterBattleResponse()
+        {
+            Random randomNumber = new Random(4);
+            int actionProbability = randomNumber.Next(0, 101);
+
+            if (actionProbability >= 20)
             {
-                get { return _hasCave; }
-                set { _hasCave = value; }
+                return MonsterAction.Attack;
             }
-
-            public new string Greeting()
+            else if (actionProbability >= 40)
             {
-                return $"Hello, I am a Forest Monster and my name is {Name}";
+                return MonsterAction.Retreat;
             }
-
-            public override bool IsHappy()
+            else
             {
-                //if (_hasSpaceship)
-                // {
-                //    return true;
-                //}
-                // else
-                //{
-                //     return false;
-                //}
-                return _hasCave ? true : false;
-            }
-
-            public MonsterAction MonsterBattleResponse()
-            {
-                Random randomNumber = new Random();
-                int actionProbability = randomNumber.Next(0, 101);
-
-                if (actionProbability >= 40)
-                {
-                    return MonsterAction.Attack;
-                }
-                else if (actionProbability >= 20)
-                {
-                    return MonsterAction.Retreat;
-                }
-                else
-                {
-                    return MonsterAction.Defend;
-                }
+                return MonsterAction.Defend;
             }
         }
     }
-
+}
